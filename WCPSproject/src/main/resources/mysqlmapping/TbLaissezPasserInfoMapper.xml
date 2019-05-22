@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.TbLaissezPasserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.wcpsproject.model.mysql.TbLaissezPasserInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="laissezPasserID" jdbcType="VARCHAR" property="laissezpasserid" />
+    <result column="carLicence" jdbcType="VARCHAR" property="carlicence" />
+    <result column="stopLocation" jdbcType="VARCHAR" property="stoplocation" />
+    <result column="startTime"  property="starttime" />
+    <result column="endTime"  property="endtime" />
+    <result column="updateTime" property="updatetime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, laissezPasserID, carLicence, stopLocation, startTime, endTime, updateTime, operator, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_laissezpasserinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_laissezpasserinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tnpy.wcpsproject.model.mysql.TbLaissezPasserInfo">
+    insert into tb_laissezpasserinfo (id, laissezPasserID, carLicence, 
+      stopLocation, startTime, endTime, 
+      updateTime, operator, status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{laissezpasserid,jdbcType=VARCHAR}, #{carlicence,jdbcType=VARCHAR}, 
+      #{stoplocation,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.wcpsproject.model.mysql.TbLaissezPasserInfo">
+    insert into tb_laissezpasserinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="laissezpasserid != null">
+        laissezPasserID,
+      </if>
+      <if test="carlicence != null">
+        carLicence,
+      </if>
+      <if test="stoplocation != null">
+        stopLocation,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="laissezpasserid != null">
+        #{laissezpasserid,jdbcType=VARCHAR},
+      </if>
+      <if test="carlicence != null">
+        #{carlicence,jdbcType=VARCHAR},
+      </if>
+      <if test="stoplocation != null">
+        #{stoplocation,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tnpy.wcpsproject.model.mysql.TbLaissezPasserInfo">
+    update tb_laissezpasserinfo
+    <set>
+      <if test="laissezpasserid != null">
+        laissezPasserID = #{laissezpasserid,jdbcType=VARCHAR},
+      </if>
+      <if test="carlicence != null">
+        carLicence = #{carlicence,jdbcType=VARCHAR},
+      </if>
+      <if test="stoplocation != null">
+        stopLocation = #{stoplocation,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tnpy.wcpsproject.model.mysql.TbLaissezPasserInfo">
+    update tb_laissezpasserinfo
+    set laissezPasserID = #{laissezpasserid,jdbcType=VARCHAR},
+      carLicence = #{carlicence,jdbcType=VARCHAR},
+      stopLocation = #{stoplocation,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

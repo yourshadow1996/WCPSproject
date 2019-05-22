@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.FenciMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.wcpsproject.model.mysql.Fenci">
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="ci" jdbcType="VARCHAR" property="ci" />
+    <result column="val" jdbcType="VARCHAR" property="val" />
+  </resultMap>
+  <insert id="insert" parameterType="com.tnpy.wcpsproject.model.mysql.Fenci">
+    insert into fenci (title, ci, val
+      )
+    values (#{title,jdbcType=VARCHAR}, #{ci,jdbcType=VARCHAR}, #{val,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.wcpsproject.model.mysql.Fenci">
+    insert into fenci
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="ci != null">
+        ci,
+      </if>
+      <if test="val != null">
+        val,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ci != null">
+        #{ci,jdbcType=VARCHAR},
+      </if>
+      <if test="val != null">
+        #{val,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

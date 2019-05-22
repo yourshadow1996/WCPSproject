@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.TbCarInfoMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.wcpsproject.model.mysql.TbCarInfo">
+    <id column="carLicence" jdbcType="VARCHAR" property="carlicence" />
+    <result column="carType" jdbcType="VARCHAR" property="cartype" />
+    <result column="carColor" jdbcType="VARCHAR" property="carcolor" />
+    <result column="driverName" jdbcType="VARCHAR" property="drivername" />
+    <result column="driverPhone" jdbcType="VARCHAR" property="driverphone" />
+    <result column="emergencyContact" jdbcType="VARCHAR" property="emergencycontact" />
+    <result column="emergencyPhone" jdbcType="VARCHAR" property="emergencyphone" />
+    <result column="registrationTime" property="registrationtime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    carLicence, carType, carColor, driverName, driverPhone, emergencyContact, emergencyPhone, 
+    registrationTime, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_carinfo
+    where carLicence = #{carlicence,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_carinfo
+    where carLicence = #{carlicence,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tnpy.wcpsproject.model.mysql.TbCarInfo">
+    insert into tb_carinfo (carLicence, carType, carColor, 
+      driverName, driverPhone, emergencyContact, 
+      emergencyPhone, registrationTime, status
+      )
+    values (#{carlicence,jdbcType=VARCHAR}, #{cartype,jdbcType=VARCHAR}, #{carcolor,jdbcType=VARCHAR}, 
+      #{drivername,jdbcType=VARCHAR}, #{driverphone,jdbcType=VARCHAR}, #{emergencycontact,jdbcType=VARCHAR}, 
+      #{emergencyphone,jdbcType=VARCHAR}, #{registrationtime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.wcpsproject.model.mysql.TbCarInfo">
+    insert into tb_carinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carlicence != null">
+        carLicence,
+      </if>
+      <if test="cartype != null">
+        carType,
+      </if>
+      <if test="carcolor != null">
+        carColor,
+      </if>
+      <if test="drivername != null">
+        driverName,
+      </if>
+      <if test="driverphone != null">
+        driverPhone,
+      </if>
+      <if test="emergencycontact != null">
+        emergencyContact,
+      </if>
+      <if test="emergencyphone != null">
+        emergencyPhone,
+      </if>
+      <if test="registrationtime != null">
+        registrationTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carlicence != null">
+        #{carlicence,jdbcType=VARCHAR},
+      </if>
+      <if test="cartype != null">
+        #{cartype,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null">
+        #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null">
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencycontact != null">
+        #{emergencycontact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null">
+        #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationtime != null">
+        #{registrationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tnpy.wcpsproject.model.mysql.TbCarInfo">
+    update tb_carinfo
+    <set>
+      <if test="cartype != null">
+        carType = #{cartype,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null">
+        carColor = #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null">
+        driverName = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        driverPhone = #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencycontact != null">
+        emergencyContact = #{emergencycontact,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null">
+        emergencyPhone = #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationtime != null">
+        registrationTime = #{registrationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carLicence = #{carlicence,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tnpy.wcpsproject.model.mysql.TbCarInfo">
+    update tb_carinfo
+    set carType = #{cartype,jdbcType=VARCHAR},
+      carColor = #{carcolor,jdbcType=VARCHAR},
+      driverName = #{drivername,jdbcType=VARCHAR},
+      driverPhone = #{driverphone,jdbcType=VARCHAR},
+      emergencyContact = #{emergencycontact,jdbcType=VARCHAR},
+      emergencyPhone = #{emergencyphone,jdbcType=VARCHAR},
+      registrationTime = #{registrationtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where carLicence = #{carlicence,jdbcType=VARCHAR}
+  </update>
+</mapper>

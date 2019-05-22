@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--本机数据库驱动jar包存放目录
+    <classPathEntry    location="D:\Java\apache-maven-3.6.0\localJars\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>-->
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库驱动，数据库地址及表名，账号，密码-->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" connectionURL="jdbc:sqlserver://192.168.1.110:1433;DatabaseName=PlateWeighDB"    userId="tnmes" password="tianneng">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类的包名及存放位置-->
+        <javaModelGenerator targetPackage="com.tnpy.wcpsproject.model.sqlserver" targetProject="tnpy/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件的包名及存放位置-->
+        <sqlMapGenerator targetPackage="sqlservermapping" targetProject="tnpy/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类的包名及存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.tnpy.wcpsproject.mapper.sqlserver" targetProject="tnpy/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--生成对应表及类名,domainObjectName是设置实体类的名字的-->
+        <table tableName="tb_User" domainObjectName="TbUserSqlServer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="people" domainObjectName="People" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+    </context>
+</generatorConfiguration>

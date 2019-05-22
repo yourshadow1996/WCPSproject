@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.TbSearchRecordMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.wcpsproject.model.mysql.TbSearchRecord">
+    <result column="search_content" jdbcType="VARCHAR" property="searchContent" />
+    <result column="search_time" jdbcType="TIMESTAMP" property="searchTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.tnpy.wcpsproject.model.mysql.TbSearchRecord">
+    insert into tb_search_record (search_content, search_time)
+    values (#{searchContent,jdbcType=VARCHAR}, #{searchTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.wcpsproject.model.mysql.TbSearchRecord">
+    insert into tb_search_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="searchContent != null">
+        search_content,
+      </if>
+      <if test="searchTime != null">
+        search_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="searchContent != null">
+        #{searchContent,jdbcType=VARCHAR},
+      </if>
+      <if test="searchTime != null">
+        #{searchTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

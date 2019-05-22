@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.ContentMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.wcpsproject.model.mysql.Content">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="craw_time" jdbcType="VARCHAR" property="crawTime" />
+    <result column="dianji_num" jdbcType="VARCHAR" property="dianjiNum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tnpy.wcpsproject.model.mysql.Content">
+    <result column="contents" jdbcType="LONGVARCHAR" property="contents" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, author, craw_time, dianji_num
+  </sql>
+  <sql id="Blob_Column_List">
+    contents
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+
+    from content
+--     where  length (id = #{id,jdbcType=INTEGER})
+
+    where  id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tnpy.wcpsproject.model.mysql.Content">
+    insert into content (id, title, author, 
+      craw_time, dianji_num, contents
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{crawTime,jdbcType=VARCHAR}, #{dianjiNum,jdbcType=VARCHAR}, #{contents,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.wcpsproject.model.mysql.Content">
+    insert into content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="crawTime != null">
+        craw_time,
+      </if>
+      <if test="dianjiNum != null">
+        dianji_num,
+      </if>
+      <if test="contents != null">
+--         contents=contents(0,100);
+        contents,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="crawTime != null">
+        #{crawTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dianjiNum != null">
+        #{dianjiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null">
+        #{contents,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tnpy.wcpsproject.model.mysql.Content">
+    update content
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="crawTime != null">
+        craw_time = #{crawTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dianjiNum != null">
+        dianji_num = #{dianjiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null">
+        contents = #{contents,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tnpy.wcpsproject.model.mysql.Content">
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      craw_time = #{crawTime,jdbcType=VARCHAR},
+      dianji_num = #{dianjiNum,jdbcType=VARCHAR},
+      contents = #{contents,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tnpy.wcpsproject.model.mysql.Content">
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      craw_time = #{crawTime,jdbcType=VARCHAR},
+      dianji_num = #{dianjiNum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

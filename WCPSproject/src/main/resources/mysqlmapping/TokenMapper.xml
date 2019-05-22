@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tnpy.wcpsproject.mapper.mysql.TokenMapper">
+  <resultMap id="BaseResultMap" type="com.tnpy.common.utils.token.Token">
+    <id column="tokenid" jdbcType="VARCHAR" property="tokenid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="buildtime" jdbcType="DOUBLE" property="buildtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tokenid, userid, token, buildtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_token
+    where tokenid = #{tokenid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_token
+    where tokenid = #{tokenid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tnpy.common.utils.token.Token">
+    insert into tb_token (tokenid, userid, token, buildtime)
+    values (#{tokenid}, #{userid}, #{token}, #{buildtime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tnpy.common.utils.token.Token">
+    insert into tb_token
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tokenid != null">
+        tokenid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="buildtime != null">
+        buildtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tokenid != null">
+        #{tokenid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        #{buildtime,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tnpy.common.utils.token.Token">
+    update tb_token
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        buildtime = #{buildtime,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where tokenid = #{tokenid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tnpy.common.utils.token.Token">
+    update tb_token
+    set userid = #{userid,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      buildtime = #{buildtime,jdbcType=DOUBLE}
+    where tokenid = #{tokenid,jdbcType=VARCHAR}
+  </update>
+</mapper>
